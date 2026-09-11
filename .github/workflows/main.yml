@@ -23,13 +23,15 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Android SDK platform and build tools
-        run: |
-          sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Install Android 36 SDK
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
-      # RootActivityLauncher requires the modified Android SDK described in README.md
-      # (Reginer/aosp-android-jar). Install that SDK before this step when building
-      # on a runner that does not already contain it.
+      - name: Install modified android.jar for hidden APIs
+        run: |
+          curl -fL \
+            https://raw.githubusercontent.com/Reginer/aosp-android-jar/main/android-36/android.jar \
+            -o "$ANDROID_HOME/platforms/android-36/android.jar"
+
       - name: Grant Gradle wrapper permission
         run: chmod +x ./gradlew
 
