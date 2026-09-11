@@ -34,6 +34,7 @@ bugsnag-android = { module = "com.bugsnag:bugsnag-android", version.ref = "bugsn
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
 compose-theme-adapter3 = { module = "com.google.android.material:compose-theme-adapter-3", version.ref = "composeThemeAdapter3" }
