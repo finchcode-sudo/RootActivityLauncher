@@ -1,0 +1,44 @@
+name: Build RootActivityLauncher APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK platform and build tools
+        run: |
+          sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      # RootActivityLauncher requires the modified Android SDK described in README.md
+      # (Reginer/aosp-android-jar). Install that SDK before this step when building
+      # on a runner that does not already contain it.
+      - name: Grant Gradle wrapper permission
+        run: chmod +x ./gradlew
+
+      - name: Build debug APK
+        run: ./gradlew --no-daemon clean assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RootActivityLauncher-debug
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
