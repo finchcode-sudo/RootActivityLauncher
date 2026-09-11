@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.documentfile)
 
     implementation(libs.compose.material3)
+    implementation(libs.compose.icons)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.runtime)
     implementation(libs.compose.material)
